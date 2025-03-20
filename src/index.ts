@@ -5,7 +5,7 @@ const app = express();
 
 app.use(express.json());
 
-const mongoUrl = "mongodb://localhost:27017/myDatabase";
+const mongoUrl = "mongodb://mongo-db:27017/myDatabase";
 
 // Connect to MongoDB
 mongoose
@@ -23,7 +23,7 @@ const User = mongoose.model("User", UserSchema);
 app.get("/", async (req, res) => {
   const users = await User.find();
 
-  console.log(users);
+  console.log("Users", users);
 
   res.status(200).send({
     data: users,
