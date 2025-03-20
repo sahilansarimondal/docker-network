@@ -1,5 +1,6 @@
-const express = require("express");
-const mongoose = require("mongoose");
+import express from "express";
+import { Request, Response } from "express";
+import mongoose from "mongoose";
 const app = express();
 
 app.use(express.json());
@@ -10,7 +11,7 @@ const mongoUrl = "mongodb://localhost:27017/myDatabase";
 mongoose
   .connect(mongoUrl)
   .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error("MongoDB connection error:", err));
+  .catch((err: any) => console.error("MongoDB connection error:", err));
 
 const UserSchema = new mongoose.Schema({
   username: String,
@@ -29,7 +30,7 @@ app.get("/", async (req, res) => {
   });
 });
 
-app.post("/user", async (req, res) => {
+app.post("/user", async (req: Request, res: Response) => {
   const { username, password } = req.body;
 
   const newUser = new User({ username, password });
